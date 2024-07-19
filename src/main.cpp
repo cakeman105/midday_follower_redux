@@ -33,10 +33,10 @@ int main(int argc, char * argv[])
         return EXIT_FAILURE;
 
     gfx.initialize(path.c_str());
-    for (size_t i = 0; i < MAX_DISP_AMOUNT; i++)
+    for (size_t i = 0; i < target.names.size() - 1; i++)
     {
-        const char * x = target.names[i].name.c_str();
-        gfx.displayEntry(0, i, x, target.names[i].type, target.names[i].size, true);
+	const char * x = target.names[i].name.c_str();
+        gfx.displayEntry(0, i + 1, x, target.names[i].type, target.names[i].size, true);
     }
 
     size_t y = 0;
@@ -48,13 +48,18 @@ int main(int argc, char * argv[])
         if (c == 'q')
             break;
         
+	if (c == KEY_RESIZE)
+	    refresh();
+	
         if (c == KEY_UP && y > 1)
         {
-            gfx.move(--y, target.names[index].name.length() + 1);
+	    y--;
+            gfx.move(y, target.names[index].name.length() + 1, target.names[index].name.c_str(), y, 0);
         }
-        else if (c == KEY_DOWN && y < MAX_DISP_AMOUNT)
+        else if (c == KEY_DOWN && y < target.names.size())
         {
-            gfx.move(++y, target.names[index].name.length() + 1);
+		y++;
+            gfx.move(y, target.names[index].name.length() + 1, target.names[index].name.c_str(), y, 0);
             index++;
         }
     }
