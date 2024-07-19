@@ -26,10 +26,11 @@ void Graphics::initialize(const char * path)
     //colour settings
     init_pair(1, COLOR_BLACK, COLOR_WHITE); 
     init_pair(2, COLOR_BLACK, COLOR_CYAN);
+    init_pair(5, COLOR_WHITE, COLOR_BLUE);
     bkgd(COLOR_PAIR(2));
     
     attron(COLOR_PAIR(2));
-    mvprintw(0, 0, "MIDDAY FOLLOWER v0.1 - A dumbed down file manager");
+    mvprintw(0, 1, "MIDDAY FOLLOWER v0.1 - A dumbed down file manager");
     attroff(COLOR_PAIR(2));
     refresh();
 
@@ -57,9 +58,12 @@ void Graphics::initialize(const char * path)
     wrefresh(win1);
     wrefresh(win2);
 
-    attron(COLOR_PAIR(2));
-    mvaddstr(31, 0, "Note: press 'q' to exit!");
-    attroff(COLOR_PAIR(2));
+    win3 = newwin(1, 80, 31, 1);
+    wbkgd(win3, COLOR_PAIR(5));
+    wrefresh(win3);
+    attron(COLOR_PAIR(5));
+    mvaddstr(31, 1, "q: exit | tab: switch panels | h: help");
+    attroff(COLOR_PAIR(5));
     wmove(win1, 0, 5);
     refresh();
 }

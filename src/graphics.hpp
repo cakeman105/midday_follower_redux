@@ -15,4 +15,5 @@ class Graphics
     private:
         WINDOW * win1;
         WINDOW * win2;
+	WINDOW * win3;
 };

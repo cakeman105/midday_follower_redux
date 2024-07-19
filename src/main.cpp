@@ -47,9 +47,6 @@ int main(int argc, char * argv[])
 
         if (c == 'q')
             break;
-        
-	if (c == KEY_RESIZE)
-	    refresh();
 	
         if (c == KEY_UP && y > 1)
         {
